@@ -1,22 +1,31 @@
 import React, { Component } from 'react'
-
+import { withRouter } from 'react-router'
+import AnimalItem from "./AnimalItem"
+import "./Animal.css"
 
 class AnimalList extends Component {
+
     render() {
         return (
             <section className="Animals">
-            <h1>Animals List</h1>
-            {
-                this.props.animals.map(animal =>
-                    <div key={animal.id}>
-                        {animal.name}
-                        : {animal.type}
-                    </div>
-                )
-            }
+                <div className="animalButton">
+                    <button type="button" className="btn btn-outline-success"
+                            onClick={() => {
+                                this.props.history.push("/animals/new")}
+                            }>Admit Animal</button>
+                </div>
+                <h1>Animal List</h1>
+                <div className="d-flex justify-content-center flex-wrap">
+                {
+                    this.props.animals.map(item => {
+                        return <AnimalItem key={item.id} animal={item}
+                            deleteAnimal={this.props.deleteAnimal} />
+                    })
+                }
+                </div>
             </section>
         )
     }
 }
 
-export default AnimalList
+export default withRouter(AnimalList)

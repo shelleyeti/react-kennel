@@ -1,0 +1,45 @@
+.animals {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.icon--dog {
+    width: 200x;
+    height: 200px;
+}
+
+.icon--dog--small {
+    width: 125px;
+    height: 125px;
+    margin-bottom: 10px;
+}
+
+.animal-card {
+    width: 15rem;
+    margin: 10px;
+}
+.edit-animal-card {
+    width: 30rem;
+}
+
+.add-animal-card {
+    width: 40rem;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-link {
+    margin: 12px 0 0 0;
+    font-size: 0.7em;
+}
+
+.animalButton {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 0 10px 0;
+  }

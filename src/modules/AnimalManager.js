@@ -27,7 +27,7 @@ export default {
         .then(e => e.json())
   },
   makeAnimal(makeObj) {
-    return fetch(`${remoteURL}/animals/`,
+    return fetch(`${remoteURL}/animals`,
         {
             method: "POST",
             headers: {

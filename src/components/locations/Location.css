@@ -1,0 +1,36 @@
+.locations {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.icon--location {
+    width: 200x;
+    height: 200px;
+}
+
+.icon--location--small {
+    width: 125px;
+    height: 125px;
+    margin-bottom: 10px;
+}
+
+.locations-delete-btn, .locations-edit-btn {
+    display: inline-block;
+}
+
+.location-card {
+    width: 15rem;
+    margin: 10px;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-link {
+    margin: 12px 0 0 0;
+    font-size: 0.7em;
+}
