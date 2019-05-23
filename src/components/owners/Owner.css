@@ -14,13 +14,17 @@
     margin-bottom: 10px;
 }
 
-.owners-delete-btn, .owners-edit-btn {
-    display: inline-block;
-}
-
 .owner-card {
     width: 15rem;
     margin: 10px;
+}
+
+.edit-owner-card {
+    width: 30rem;
+}
+
+.add-owner-card {
+    width: 40rem;
 }
 
 .card-title {
@@ -33,4 +37,14 @@
 .card-link {
     margin: 12px 0 0 0;
     font-size: 0.7em;
+}
+
+.ownerButton {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 0 10px 0;
+  }
+
+  .ownerForm {
+    padding: 20px;
 }

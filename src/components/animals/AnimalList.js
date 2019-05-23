@@ -15,7 +15,7 @@ class AnimalList extends Component {
                             }>Admit Animal</button>
                 </div>
                 <h1>Animal List</h1>
-                <div className="d-flex justify-content-center flex-wrap">
+                <div className="d-flex justify-content-center row">
                 {
                     this.props.animals.map(item => {
                         return <AnimalItem key={item.id} animal={item}

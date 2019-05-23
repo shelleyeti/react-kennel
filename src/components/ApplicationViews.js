@@ -13,6 +13,10 @@ import EmployeeDetail from "./employees/EmployeeDetail"
 import OwnerDetail from "./owners/OwnerDetail"
 import LocationDetail from "./locations/LocationDetail"
 import AnimalForm from "./animals/AnimalForm"
+import EmployeeForm from "./employees/EmployeeForm"
+import LocationForm from "./locations/LocationForm"
+import OwnerForm from "./owners/OwnerForm"
+import SearchResults from "./search/SearchResults"
 import { withRouter } from 'react-router'
 
 
@@ -38,14 +42,18 @@ class ApplicationViews extends Component {
         })
     };
 
-    addAnimal = (animal) =>
-    AnimalManager.makeAnimal(animal)
-    .then(() => AnimalManager.getAll())
-    .then(animals =>
-        this.setState({
-            animals: animals
-        })
-);
+    addAnimal = (animal) => {
+        const newState = {};
+        AnimalManager.makeAnimal(animal)
+        .then(() => AnimalManager.getAll())
+        .then(animals =>
+            this.setState({
+                animals: animals})
+        ).then(() => {
+            this.props.history.push("/animals")
+            this.setState(newState)
+        });
+        }
     
     deleteEmployee = (id) => {
         const newState = {};
@@ -58,6 +66,19 @@ class ApplicationViews extends Component {
         })
     };
 
+    addEmployee = (employee) => {
+        const newState = {};
+        EmployeeManager.makeEmployee(employee)
+        .then(() => EmployeeManager.getAll())
+        .then(employees =>
+            this.setState({
+                employees: employees})
+        ).then(() => {
+            this.props.history.push("/employees")
+            this.setState(newState)
+        });
+        }
+
     deleteLocation = (id) => {
         const newState = {};
         LocationManager.deleteLocation(id)
@@ -69,6 +90,19 @@ class ApplicationViews extends Component {
         })
     };
 
+    addLocation = (location) => {
+        const newState = {};
+        LocationManager.makeLocation (location)
+        .then(() => LocationManager.getAll())
+        .then(locations =>
+            this.setState({
+                locations: locations})
+        ).then(() => {
+            this.props.history.push("/locations")
+            this.setState(newState)
+        });
+        }
+
     deleteOwner = (id) => {
         const newState = {};
         OwnerManager.deleteOwner(id)
@@ -79,6 +113,19 @@ class ApplicationViews extends Component {
             this.setState(newState)
         })
     };
+
+    addOwner = (owner) => {
+        const newState = {};
+        OwnerManager.makeOwner(owner)
+        .then(() => OwnerManager.getAll())
+        .then(owners =>
+            this.setState({
+                owners: owners})
+        ).then(() => {
+            this.props.history.push("/owners")
+            this.setState(newState)
+        });
+        }
 
     componentDidMount() {
         const newState = {};
@@ -110,6 +157,12 @@ class ApplicationViews extends Component {
                     return <LocationDetail location={ location }
                                 deleteLocation={ this.deleteLocation } />
                 }} />
+                <Route path="/locations/new" render={(props) => {
+                return <LocationForm {...props}
+                    addLocation={this.addlocation} />
+                }} />
+
+
                 <Route exact path="/animals" render={(props) => {
                     return <AnimalList animals={this.state.animals} 
                         deleteAnimal={this.deleteAnimal}
@@ -142,6 +195,8 @@ class ApplicationViews extends Component {
                     addAnimal={this.addAnimal}
                     employees={this.state.employees} />
                 }} />
+
+
                 <Route exact path="/employees" render={(props) => {
                     return <EmployeeList employees={this.state.employees} 
                         deleteEmployee={this.deleteEmployee}
@@ -159,6 +214,15 @@ class ApplicationViews extends Component {
                     return <EmployeeDetail employee={ employee }
                                 deleteEmployee={ this.deleteEmployee } />
                 }} />
+                <Route path="/employees/new" render={(props) => {
+                return <EmployeeForm {...props}
+                    addEmployee={this.addEmployee}
+                    animals={this.state.animals} 
+                    employees={this.state.employees}
+                    />
+                }} />
+
+
                 <Route exact path="/owners" render={(props) => {
                     return <OwnerList owners={this.state.owners}
                         deleteOwner={this.deleteOwner}
@@ -175,6 +239,17 @@ class ApplicationViews extends Component {
 
                     return <OwnerDetail owner={ owner }
                                 deleteOwner={ this.deleteOwner } />
+                }} />
+                <Route path="/owners/new" render={(props) => {
+                return <OwnerForm {...props}
+                    addOwner={this.addOwner}
+                    animals={this.state.animals} />
+                }} />
+
+
+                 <Route exact path="/search" render={(props) => {
+                    return <SearchResults search={this.state.search}
+                    />
                 }} />
             </React.Fragment>
         )

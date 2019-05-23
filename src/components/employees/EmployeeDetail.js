@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import "./Employee.css"
 import employee from "./Employee.svg"
 
-
 export default class Employee extends Component {
     state = {
         saveDisabled: false

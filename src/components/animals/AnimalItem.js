@@ -24,7 +24,7 @@ class AnimalItem extends Component {
 
     render() {
         return (
-            <div className="card animal-card d-inline-flex">
+            <div className="card animal-card d-inline-flex col-md-2">
                 <div className="card-body">
                     <h5 className="card-title">{this.props.animal.name}
                     <img src={dog} className="icon--dog--small" alt="happy dog"/></h5>

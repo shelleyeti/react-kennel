@@ -12,25 +12,29 @@ class Kennel extends Component {
         searchAnimals: [],
         searchEmployees: [],
         searchLocations: [],
-        searchOwners: []
+        searchOwners: [],
+        searchFunction: this.search
     }
 
     // Add the q to the url and search options
     search = (results) => {
         const newState = {}
-        fetch("http://localhost:5002/animals")
+        fetch(`http://localhost:5002/animals?q=${results}`)
             .then(r => r.json())
             .then(animals => newState.animals = animals)
-            .then(() => fetch("http://localhost:5002/employees")
+            .then(() => fetch(`http://localhost:5002/employees?q=${results}`)
             .then(r => r.json()))
             .then(employees => newState.employees = employees)
-            .then(() => fetch("http://localhost:5002/locationss")
+            .then(() => fetch(`http://localhost:5002/locations?q=${results}`)
             .then(r => r.json()))
             .then(locations => newState.locations = locations)
-            .then(() => fetch("http://localhost:5002/owners")
+            .then(() => fetch(`http://localhost:5002/owners?q=${results}`)
             .then(r => r.json()))
             .then(owners => newState.owners = owners)
-            .then(() => this.setState(newState))
+            .then(() => {
+                this.props.history.push("/")
+                this.setState(newState)
+            })
     }
 
     handleSearch = (e) => {
@@ -42,8 +46,9 @@ class Kennel extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavBar />
-                <ApplicationViews searchAnimals={this.state.searchAnimals} 
+                <NavBar searchFunction={this.state.searchFunction} />
+                <ApplicationViews
+                    searchAnimals={this.state.searchAnimals} 
                     searchEmployees={this.state.searchEmployees}
                     searchLocations={this.state.searchLocations}
                     searchOwners={this.state.searchOwners}

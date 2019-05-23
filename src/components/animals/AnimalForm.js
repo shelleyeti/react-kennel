@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { withRouter } from "react-router"
 import "./Animal.css";
 
 class AnimalForm extends Component {
@@ -34,7 +33,6 @@ class AnimalForm extends Component {
 
             // Create the animal and redirect user to animal list
             this.props.addAnimal(animal)
-            .then(() => this.props.history.push("/animals"));
         }
     };
 
@@ -77,7 +75,7 @@ class AnimalForm extends Component {
                             ))}
                         </select>
                     </div>
-                    <button type="button" onClick={this.constructNewAnimal} className="btn btn-outline-primary animalButton">Submit</button>
+                    <button type="button" onClick={this.constructNewAnimal} className="btn btn-outline-primary animalButton float-right">Submit</button>
                 </form>
                 </div>
             </React.Fragment>

@@ -14,13 +14,17 @@
     margin-bottom: 10px;
 }
 
-.employees-delete-btn, .employees-edit-btn {
-    display: inline-block;
-}
-
 .employee-card {
     width: 15rem;
     margin: 10px;
+}
+
+.edit-employee-card {
+    width: 30rem;
+}
+
+.add-employee-card {
+    width: 40rem;
 }
 
 .card-title {
@@ -33,4 +37,14 @@
 .card-link {
     margin: 12px 0 0 0;
     font-size: 0.7em;
+}
+
+.employeeButton {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 0 10px 0;
+  }
+
+  .employeeForm {
+    padding: 20px;
 }

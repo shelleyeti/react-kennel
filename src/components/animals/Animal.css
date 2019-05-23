@@ -18,6 +18,7 @@
     width: 15rem;
     margin: 10px;
 }
+
 .edit-animal-card {
     width: 30rem;
 }
@@ -42,4 +43,8 @@
     display: flex;
     justify-content: space-evenly;
     margin: 0 0 10px 0;
+  }
+
+  .animalForm {
+      padding: 20px;
   }

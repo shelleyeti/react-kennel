@@ -19,6 +19,12 @@
       "id": 4,
       "name": "Heather Cleland",
       "time": "Part Time"
+    },
+    {
+      "name": "Test for Problems",
+      "time": "Full Time",
+      "animalId": 2,
+      "id": 5
     }
   ],
   "locations": [
@@ -50,11 +56,6 @@
       "breed": "dog"
     },
     {
-      "id": 3,
-      "name": "Shitty",
-      "breed": "bird"
-    },
-    {
       "id": 4,
       "name": "Devil's Mouth Piece",
       "breed": "snake"
@@ -70,15 +71,16 @@
       "breed": "lizard"
     },
     {
-      "id": 7,
-      "name": "Stompy Feet",
-      "breed": "horse"
-    },
-    {
       "name": "Slimey",
       "breed": "snail",
       "employeeId": 1,
       "id": 15
+    },
+    {
+      "name": "Ducksie",
+      "breed": "duck",
+      "employeeId": 4,
+      "id": 16
     }
   ],
   "owners": [
