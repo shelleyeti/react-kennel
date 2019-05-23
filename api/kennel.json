@@ -13,17 +13,19 @@
     {
       "id": 3,
       "name": "Addam Joor",
+      "animalId": 1,
       "time": "Part Time"
     },
     {
       "id": 4,
       "name": "Heather Cleland",
+      "animalId": 2,
       "time": "Part Time"
     },
     {
-      "name": "Test for Problems",
-      "time": "Full Time",
-      "animalId": 2,
+      "name": "Corey Arnold",
+      "time": "Part Time",
+      "animalId": 4,
       "id": 5
     }
   ],
@@ -62,7 +64,7 @@
     },
     {
       "id": 5,
-      "name": "Legion of Many",
+      "name": "Legion",
       "breed": "ants"
     },
     {

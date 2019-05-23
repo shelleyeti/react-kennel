@@ -17,7 +17,7 @@ export default class Location extends Component {
     render() {
         return (
             <section className="location">
-                <div key={ this.props.location.id } className="card location-card">
+                <div key={ this.props.location.id } className="card edit-location-card mx-auto">
                     <div className="card-body">
                         <h4 className="card-title">
                             <img src={ location } className="icon--location" alt="building"/>

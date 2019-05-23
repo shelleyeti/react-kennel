@@ -17,7 +17,7 @@ export default class Owner extends Component {
     render() {
         return (
             <section className="owner">
-                <div key={ this.props.owner.id } className="card owner-card">
+                <div key={ this.props.owner.id } className="card edit-owner-card mx-auto">
                     <div className="card-body">
                         <h4 className="card-title">
                             <img src={ owner } className="icon--owner" alt="pet owner"/>

@@ -12,7 +12,7 @@ class OwnerList extends Component {
                     <button type="button" className="btn btn-outline-success"
                             onClick={() => {
                                 this.props.history.push("/owners/new")}
-                            }>Add Employee</button>
+                            }>Add Owner</button>
                 </div>
                 <h1>Owner List</h1>
                 <div className="d-flex justify-content-center row">

@@ -39,7 +39,7 @@ class EmployeeForm extends Component {
                 <div className="card add-employee-card mx-auto">
                 <form className="employeeForm">
                     <div className="form-group">
-                        <label htmlFor="employeeName">Emplpoyee name</label>
+                        <label htmlFor="employeeName">Employee name</label>
                         <input
                             type="text"
                             required
