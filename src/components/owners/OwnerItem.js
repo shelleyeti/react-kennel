@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
-import owner from "./Owner.svg"
+import owner from "./Owner.png"
 import "./Owner.css"
 
 class OwnerItem extends Component {
@@ -33,7 +33,12 @@ class OwnerItem extends Component {
                     </span>
                     <div className="d-flex justify-content-center">
                         <Link className="nav-link" to={`/owners/${this.props.owner.id}`}>Details</Link>
-                        <button className="btn btn-outline-primary owner-delete-btn btn-sm" disabled={ this.state.saveDisabled } onClick={this.handleClickDelete}>Delete</button>
+                        <button 
+                        className="btn btn-outline-primary owner-delete-btn btn-sm" 
+                        disabled={ this.state.saveDisabled } 
+                        onClick={this.handleClickDelete}>
+                        Delete Hat
+                        </button>
                     </div>
                 </div>
             </div>

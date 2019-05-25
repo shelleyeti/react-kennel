@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
-import employee from "./Employee.svg"
+import employee from "./Employee.png"
 import "./Employee.css"
 
 class EmployeeItem extends Component {
@@ -33,7 +33,12 @@ class EmployeeItem extends Component {
                     </span>
                     <div className="d-flex justify-content-center">
                         <Link className="nav-link" to={`/employees/${this.props.employee.id}`}>Details</Link>
-                        <button className="btn btn-outline-primary animal-delete-btn btn-sm" disabled={ this.state.saveDisabled } onClick={this.handleClickDelete}>Delete</button>
+                        <button 
+                        className="btn btn-outline-primary animal-delete-btn btn-sm" 
+                        disabled={ this.state.saveDisabled } 
+                        onClick={this.handleClickDelete}>
+                        Delete Hat
+                        </button>
                     </div>
                 </div>
             </div>

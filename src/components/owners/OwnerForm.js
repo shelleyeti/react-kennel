@@ -37,7 +37,7 @@ class OwnerForm extends Component {
                 <div className="card add-owner-card mx-auto">
                 <form className="ownerForm">
                     <div className="form-group">
-                        <label htmlFor="ownerName">Owner name</label>
+                        <label htmlFor="ownerName">Hat name</label>
                         <input
                             type="text"
                             required
@@ -60,7 +60,12 @@ class OwnerForm extends Component {
                             ))}
                         </select>
                     </div>
-                    <button type="button" onClick={this.constructNewOwner} className="btn btn-outline-primary ownerButton float-right">Submit</button>
+                    <button 
+                    type="button" 
+                    onClick={this.constructNewOwner} 
+                    className="btn btn-outline-primary ownerButton float-right">
+                    Submit Hat
+                    </button>
                 </form>
                 </div>
             </React.Fragment>

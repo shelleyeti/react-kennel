@@ -33,7 +33,12 @@ class LocationItem extends Component {
                     </span>
                     <div className="d-flex justify-content-center">
                         <Link className="nav-link" to={`/locations/${this.props.location.id}`}>Details</Link>
-                        <button className="btn btn-outline-primary location-delete-btn btn-sm" disabled={ this.state.saveDisabled } onClick={this.handleClickDelete}>Delete</button>
+                        <button 
+                        className="btn btn-outline-primary location-delete-btn btn-sm" 
+                        disabled={ this.state.saveDisabled } 
+                        onClick={this.handleClickDelete}>
+                        Delete Hat
+                        </button>
                     </div>
                 </div>
             </div>

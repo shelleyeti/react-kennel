@@ -14,7 +14,7 @@ class EmployeeList extends Component {
                                 this.props.history.push("/employees/new")}
                             }>Add Employee</button>
                 </div>
-                <h1>Employee List</h1>
+                <h1>Hat List</h1>
                 <div className="d-flex justify-content-center row">
                 {
                     this.props.employees.map(item => {

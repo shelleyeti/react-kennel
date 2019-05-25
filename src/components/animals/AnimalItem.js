@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
-import dog from "./DogIcon.svg"
+import dog from "./DogIcon.png"
 import "./Animal.css"
 
 class AnimalItem extends Component {
@@ -26,14 +26,30 @@ class AnimalItem extends Component {
         return (
             <div className="card animal-card d-inline-flex col-md-2">
                 <div className="card-body">
-                    <h5 className="card-title">{this.props.animal.name}
-                    <img src={dog} className="icon--dog--small" alt="happy dog"/></h5>
-                    <span className="d-flex justify-content-center">
+                    <div className="card-title">
+                    <h5>{this.props.animal.name}</h5>
+                    <img src={dog} className="icon--dog--small" alt="happy dog"/>
+                    </div>
+                    <p className="d-flex justify-content-center">
                         {this.props.animal.breed}
-                    </span>
+                    </p>
                     <div className="d-flex justify-content-center">
                         <Link className="nav-link" to={`/animals/${this.props.animal.id}`}>Details</Link>
-                        <button className="btn btn-outline-primary animal-delete-btn btn-sm" disabled={ this.state.saveDisabled } onClick={this.handleClickDelete}>Delete</button>
+                    </div>
+                    <div>
+                        <button 
+                        type="button" 
+                        className="btn btn-outline-primary btn-sm" 
+                        onClick={() => { this.props.history.push(`/animals/${this.props.animal.id}/edit`); 
+                        }}>
+                        Edit Hat
+                        </button>
+                        <button 
+                        className="btn btn-outline-primary animal-delete-btn btn-sm" 
+                        disabled={ this.state.saveDisabled } 
+                        onClick={this.handleClickDelete}>
+                        Delete Hat
+                        </button>
                     </div>
                 </div>
             </div>

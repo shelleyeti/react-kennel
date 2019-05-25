@@ -39,7 +39,7 @@ class EmployeeForm extends Component {
                 <div className="card add-employee-card mx-auto">
                 <form className="employeeForm">
                     <div className="form-group">
-                        <label htmlFor="employeeName">Employee name</label>
+                        <label htmlFor="employeeName">Employee Hat</label>
                         <input
                             type="text"
                             required
@@ -55,14 +55,13 @@ class EmployeeForm extends Component {
                             id="time"
                             onChange={this.handleFieldChange}>
                             <option value="">Select an time option</option>
-                            <option value="Full Time">Full Time</option>
-                            <option value="Part Time">Part Time</option>
+                            <option value="Full Time">Full Time Hat</option>
+                            <option value="Part Time">Part Time Hat</option>
                             ))}
                         </select>
                     </div>
-
                     <div className="form-group">
-                        <label htmlFor="animal">Assign to animal</label>
+                        <label htmlFor="animal">Assign to hat</label>
                         <select defaultValue=""
                             name="animal"
                             id="animalId"
@@ -75,7 +74,12 @@ class EmployeeForm extends Component {
                             ))}
                         </select>
                     </div>
-                    <button type="button" onClick={this.constructNewEmployee} className="btn btn-outline-primary employeeButton float-right">Submit</button>
+                    <button 
+                    type="button" 
+                    onClick={this.constructNewEmployee} 
+                    className="btn btn-outline-primary employeeButton float-right">
+                    Submit Hat
+                    </button>
                 </form>
                 </div>
             </React.Fragment>

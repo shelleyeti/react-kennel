@@ -21,10 +21,6 @@ class NavBar extends Component {
                         <Link className="nav-link" to="/owners">Owners</Link>
                     </li>
                 </ul>
-                <input type="text" id="search-input" onKeyPress={(event) => { 
-                    if(event.keyCode == 13)
-                        this.props.searchFunction(event.target.value)
-                }}></input>
             </nav>
         )
     }

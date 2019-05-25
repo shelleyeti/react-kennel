@@ -12,7 +12,7 @@ class LocationList extends Component {
                     <button type="button" className="btn btn-outline-success"
                             onClick={() => {
                                 this.props.history.push("/locations/new")}
-                            }>Add Location</button>
+                            }>Add Hat Location</button>
                 </div>
                 <h1>Location List</h1>
                 <div className="d-flex justify-content-center row">

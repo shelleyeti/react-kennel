@@ -2,21 +2,21 @@ const remoteURL = "http://localhost:5002"
 
 export default {
   get(id) {
-    return fetch(`${remoteURL}/animals/${id}`).then(e => e.json())
+    return fetch(`${remoteURL}/employeeLocations/${id}`).then(e => e.json())
   },
   getAll() {
-    return fetch(`${remoteURL}/animals`).then(e => e.json())
+    return fetch(`${remoteURL}/employeeLocations`).then(e => e.json())
   },
-  deleteAnimal(id) {
-    return fetch(`${remoteURL}/animals/${id}`, {
+  deleteEmployeeLocation(id) {
+    return fetch(`${remoteURL}/employeeLocations/${id}`, {
       method: "DELETE",
       header: {
           "Content-Type": "application/json"
       }
     }).then(e => e.json())
   },
-  editAnimal(editObj) {
-    return fetch (`${remoteURL}/animals/${editObj.id}`,
+  editEmployeeLocation(editObj) {
+    return fetch (`${remoteURL}/employeeLocations/${editObj.id}`,
             {
                 method:"PATCH",
                 headers: {
@@ -26,8 +26,8 @@ export default {
             })
         .then(e => e.json())
   },
-  makeAnimal(makeObj) {
-    return fetch(`${remoteURL}/animals`,
+  makeEmployeeLocation(makeObj) {
+    return fetch(`${remoteURL}/employeeLocations`,
         {
             method: "POST",
             headers: {

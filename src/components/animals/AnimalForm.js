@@ -62,8 +62,9 @@ class AnimalForm extends Component {
                             placeholder="Breed"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="employee">Assign to caretaker</label>
-                        <select defaultValue=""
+                        <label htmlFor="employee">Assign to hattaker</label>
+                        <select 
+                            defaultValue=""
                             name="employee"
                             id="employeeId"
                             onChange={this.handleFieldChange}>
@@ -75,7 +76,12 @@ class AnimalForm extends Component {
                             ))}
                         </select>
                     </div>
-                    <button type="button" onClick={this.constructNewAnimal} className="btn btn-outline-primary animalButton float-right">Submit</button>
+                    <button 
+                    type="button" 
+                    onClick={this.constructNewAnimal} 
+                    className="btn btn-outline-primary animalButton float-right">
+                    Submit Hat
+                    </button>
                 </form>
                 </div>
             </React.Fragment>

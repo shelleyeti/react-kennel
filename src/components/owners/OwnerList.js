@@ -14,7 +14,7 @@ class OwnerList extends Component {
                                 this.props.history.push("/owners/new")}
                             }>Add Owner</button>
                 </div>
-                <h1>Owner List</h1>
+                <h1>Hat List</h1>
                 <div className="d-flex justify-content-center row">
                 {
                     this.props.owners.map(item => {

@@ -12,13 +12,13 @@ class AnimalList extends Component {
                     <button type="button" className="btn btn-outline-success"
                             onClick={() => {
                                 this.props.history.push("/animals/new")}
-                            }>Admit Animal</button>
+                            }>Hatmit Animal</button>
                 </div>
                 <h1>Animal List</h1>
                 <div className="d-flex justify-content-center row">
                 {
                     this.props.animals.map(item => {
-                        return <AnimalItem key={item.id} animal={item}
+                        return <AnimalItem key={item.id} animal={item} {...this.props}
                             deleteAnimal={this.props.deleteAnimal} />
                     })
                 }

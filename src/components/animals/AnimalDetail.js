@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import "./Animal.css"
-import dog from "./DogIcon.svg"
+import dog from "./DogIcon.png"
 
 export default class Animal extends Component {
     state = {
@@ -23,8 +23,13 @@ export default class Animal extends Component {
                             <img src={ dog } className="icon--dog" alt="happy dog"/>
                             { this.props.animal.name }
                         </h4>
-                        <h6 className="card-title">{ this.props.animal.breed }</h6>
-                        <button className="btn btn-outline-primary animal-delete-btn btn-sm" disabled={ this.state.saveDisabled } onClick={this.handleClickDelete}>Delete</button>
+                        <h6 className="card-title">{ this.props.animal.employeeId === this.props.employees.id ? this.props.employees.name : "Please assign a hattaker" }</h6>
+                        <button 
+                        className="btn btn-outline-primary animal-delete-btn btn-sm" 
+                        disabled={ this.state.saveDisabled } 
+                        onClick={this.handleClickDelete}>
+                        Delete Hat
+                        </button>
                     </div>
                 </div>
             </section>

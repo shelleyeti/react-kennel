@@ -24,7 +24,12 @@ export default class Location extends Component {
                             { this.props.location.name }
                         </h4>
                         <h6 className="card-title">{ this.props.location.breed }</h6>
-                        <button className="btn btn-outline-primary location-delete-btn btn-sm" disabled={ this.state.saveDisabled } onClick={this.handleClickDelete}>Delete</button>
+                        <button 
+                        className="btn btn-outline-primary location-delete-btn btn-sm" 
+                        disabled={ this.state.saveDisabled } 
+                        onClick={this.handleClickDelete}>
+                        Delete Hat
+                        </button>
                     </div>
                 </div>
             </section>

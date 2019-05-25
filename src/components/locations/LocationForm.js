@@ -52,7 +52,7 @@ class LocationForm extends Component {
                             id="locationAddress"
                             placeholder="Location address"/>
                     </div>
-                    <button type="button" onClick={this.constructNewOwner} className="btn btn-outline-primary ownerButton float-right">Submit</button>
+                    <button type="button" onClick={this.constructNewOwner} className="btn btn-outline-primary ownerButton float-right">Submit Hat</button>
                 </form>
                 </div>
             </React.Fragment>
