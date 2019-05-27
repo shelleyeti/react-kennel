@@ -6,6 +6,7 @@ class AnimalForm extends Component {
     state = {
         animalName: "",
         breed: "",
+        animalId: "",
         employeeId: ""
     };
 
@@ -26,15 +27,21 @@ class AnimalForm extends Component {
         } else {
             const animal = {
                 name: this.state.animalName,
-                breed: this.state.breed,
-                // Make sure the employeeId is saved to the database as a number since it is a foreign key.
-                employeeId: parseInt(this.state.employeeId)
+                breed: this.state.breed
             };
-
             // Create the animal and redirect user to animal list
             this.props.addAnimal(animal)
+            .then((animals) => {
+                
+                var lastAnimal = animals[animals.length-1];
+                const joined = {
+                    animalId: parseInt(lastAnimal.id),
+                    employeeId: parseInt(this.state.employeeId)
+                } 
+                this.props.addEmployeeAnimal(joined)
+             })
         }
-    };
+    }
 
     render() {
         return (

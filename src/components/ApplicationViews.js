@@ -53,11 +53,13 @@ class ApplicationViews extends Component {
     addAnimal = (animal) => {
         const newState = {};
         return AnimalManager.makeAnimal(animal)
-            .then(() => AnimalManager.getAll())
+            .then((animalp) => AnimalManager.getAll())
             .then(animals => newState.animals = animals)
-            .then(() => {
+            .then((animals) => {
                 this.props.history.push("/animals")
                 this.setState(newState)
+
+                return animals;
             });
     };
 
@@ -183,17 +185,6 @@ class ApplicationViews extends Component {
             })
     };
 
-    addEmployeeAnimal = (employeeAnimal) => {
-        const newState = {};
-        EmployeeAnimal.makeEmployeeAnimal(employeeAnimal)
-            .then(EmployeeAnimal.getAll)
-            .then(employeeAnimals => newState.employeeAnimals = employeeAnimals)
-            .then(() => {
-                this.props.history.push("/employees")
-                this.setState(newState)
-            })
-    };
-
     updateEmployeeAnimal = (employeeAnimalObject) => {
         const newState = {};
         EmployeeAnimal.editEmployeeAnimal(employeeAnimalObject)
@@ -271,11 +262,11 @@ class ApplicationViews extends Component {
             })
     };
 
-    addEmployeeAnimal = (EmployeeAnimal) => {
+    addEmployeeAnimal = (employeeAnimal) => {
         const newState = {};
-        EmployeeAnimal.makeEmployeeAnimal(EmployeeAnimal)
+        EmployeeAnimal.makeEmployeeAnimal(employeeAnimal)
             .then(EmployeeAnimal.getAll)
-            .then(EmployeeAnimals => newState.EmployeeAnimals = EmployeeAnimals)
+            .then(employeeAnimals => newState.employeeAnimals = employeeAnimals)
             .then(() => {
                 this.props.history.push("/animals")
                 this.setState(newState)
@@ -422,7 +413,10 @@ class ApplicationViews extends Component {
                 <Route path="/animals/new" render={(props) => {
                     return <AnimalForm {...props}
                         addAnimal={this.addAnimal}
-                        employees={this.state.employees} />
+                        animals={this.state.animals}
+                        employees={this.state.employees}
+                        addEmployeeAnimal={this.addEmployeeAnimal}
+                         />
                 }} />
 
 
