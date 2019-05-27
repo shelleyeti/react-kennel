@@ -3,34 +3,26 @@
     {
       "id": 1,
       "name": "Eliot Clarke",
-      "time": "Full Time",
-      "animalId": 1,
-      "locationId": 2
+      "time": "Full Time"
     },
     {
       "id": 2,
       "name": "Emily Loggins",
-      "time": "Full Time",
-      "locationId": 1
+      "time": "Full Time"
     },
     {
       "id": 3,
       "name": "Addam Joor",
-      "animalId": 1,
-      "time": "Part Time",
-      "locationId": 3
+      "time": "Part Time"
     },
     {
       "id": 4,
       "name": "Heather Cleland",
-      "animalId": 2,
-      "time": "Part Time",
-      "locationId": 2
+      "time": "Part Time"
     },
     {
       "name": "Corey Arnold",
       "time": "Part Time",
-      "animalId": 4,
       "id": 5
     }
   ],
@@ -55,37 +47,31 @@
     {
       "id": 1,
       "name": "Catterina",
-      "breed": "cats",
-      "employeeId": 3
+      "breed": "cats"
     },
     {
       "id": 2,
       "name": "Doggo",
-      "breed": "dog",
-      "employeeId": 1
+      "breed": "dog"
     },
     {
       "id": 4,
       "name": "Devil's Mouth",
-      "breed": "snake",
-      "employeeId": 1
+      "breed": "snake"
     },
     {
       "id": 5,
       "name": "Legion",
-      "breed": "ants",
-      "employeeId": 1
+      "breed": "ants"
     },
     {
       "id": 6,
       "name": "Judgey",
-      "breed": "lizard",
-      "employeeId": 3
+      "breed": "lizard"
     },
     {
       "name": "Slimey",
       "breed": "snail",
-      "employeeId": 1,
       "id": 15
     }
   ],
@@ -116,6 +102,16 @@
       "id": 1,
       "animalId": 1,
       "employeeId": 1
+    },
+    {
+      "id": 2,
+      "animalId": 1,
+      "employeeId": 2
+    },
+    {
+      "id": 3,
+      "animalId": 2,
+      "employeeId": 3
     }
   ],
   "employeeLocations": [

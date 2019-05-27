@@ -30,7 +30,10 @@ class ApplicationViews extends Component {
         employees: [],
         locations: [],
         animals: [],
-        owners: []
+        owners: [],
+        employeeAnimals: [],
+        employeeLocations: [],
+        ownerAnimals: []
     }
 
 
@@ -241,7 +244,7 @@ class ApplicationViews extends Component {
             .then(OwnerAnimal.getAll)
             .then(OwnerAnimals => newState.OwnerAnimals = OwnerAnimals)
             .then(() => {
-                this.props.history.push("/owner")
+                this.props.history.push("/animals")
                 this.setState(newState)
             })
     };
@@ -252,22 +255,55 @@ class ApplicationViews extends Component {
             .then(OwnerAnimal.getAll)
             .then(OwnerAnimals => newState.OwnerAnimals = OwnerAnimals)
             .then(() => {
-                this.props.history.push("/owner")
+                this.props.history.push("/animals")
                 this.setState(newState)
             })
     };
 
-    updateOwnerAnimal = (OwnerAnimalObject) => {
+    deleteEmployeeAnimal = (id) => {
         const newState = {};
-        OwnerAnimal.editOwnerAnimal(OwnerAnimalObject)
-            .then(OwnerAnimal.getAll)
-            .then(OwnerAnimals => newState.OwnerAnimals = OwnerAnimals)
+        EmployeeAnimal.deleteEmployeeAnimal(id)
+            .then(EmployeeAnimal.getAll)
+            .then(EmployeeAnimals => newState.EmployeeAnimals = EmployeeAnimals)
             .then(() => {
-                this.props.history.push("/owner")
+                this.props.history.push("/animals")
                 this.setState(newState)
             })
     };
 
+    addEmployeeAnimal = (EmployeeAnimal) => {
+        const newState = {};
+        EmployeeAnimal.makeEmployeeAnimal(EmployeeAnimal)
+            .then(EmployeeAnimal.getAll)
+            .then(EmployeeAnimals => newState.EmployeeAnimals = EmployeeAnimals)
+            .then(() => {
+                this.props.history.push("/animals")
+                this.setState(newState)
+            })
+    };
+
+    deleteEmployeeLocation = (id) => {
+        const newState = {};
+        EmployeeLocation.deleteEmployeeLocation(id)
+            .then(EmployeeLocation.getAll)
+            .then(EmployeeLocations => newState.EmployeeLocations = EmployeeLocations)
+            .then(() => {
+                this.props.history.push("/locations")
+                this.setState(newState)
+            })
+    };
+
+    addEmployeeLocation = (EmployeeLocation) => {
+        const newState = {};
+        EmployeeLocation.makeEmployeeLocation(EmployeeLocation)
+            .then(EmployeeLocation.getAll)
+            .then(EmployeeLocations => newState.EmployeeLocations = EmployeeLocations)
+            .then(() => {
+                this.props.history.push("/locations")
+                this.setState(newState)
+            })
+    };
+    
     componentDidMount() {
         const newState = {};
         AnimalManager.getAll()
@@ -275,7 +311,12 @@ class ApplicationViews extends Component {
             .then(EmployeeManager.getAll).then(employees => { newState.employees = employees })
             .then(LocationManager.getAll).then(locations => { newState.locations = locations })
             .then(OwnerManager.getAll).then(owners => { newState.owners = owners })
-            .then(() => this.setState(newState))
+            .then(EmployeeAnimal.getAll).then(employeeAnimals => { 
+                newState.employeeAnimals = employeeAnimals})
+            .then(EmployeeLocation.getAll).then(employeeLocations => { newState.employeeLocations = employeeLocations})
+            .then(OwnerAnimal.getAll).then(ownerAnimals => { newState.ownerAnimals = ownerAnimals})
+            .then(() => 
+            this.setState(newState))
     };
 
     render() {
@@ -295,9 +336,33 @@ class ApplicationViews extends Component {
                     if (!location) {
                         location = { id: 404, name: "404", address: "Address not found" }
                     }
+                    
+                    // If current location details is in the employeeLocations joined table, adds to an array called employeeLocationsId
+                    let employeeLocationsIds = this.state.employeeLocations.filter(locationJoin => {
+                        let locationId = 0
+                        if (locationJoin != null && locationJoin.locationId != null) {
+                            locationId = locationJoin.locationId
+                        }
+                        if (location.id === parseInt(locationId))
+                            return location;
+                    })
+
+                    //Take employeeLocationsId array and compare to employees table
+                    let employeeLocations = this.state.employees.filter(employee => {
+                        let employeeId = 0;
+                        if(employee != null && employee.id != null){
+                            employeeId = employee.id;
+                        }
+                        for(let i = 0; i<employeeLocationsIds.length; i++){
+                            if(employeeLocationsIds[i].employeeId === employeeId)
+                                return employeeLocationsIds[i];
+                        }
+                    });
 
                     return <LocationDetail location={location}
-                        deleteLocation={this.deleteLocation} />
+                        deleteLocation={this.deleteLocation} 
+                        employeeLocations={employeeLocations}
+                        />
                 }} />
                 <Route path="/locations/new" render={(props) => {
                     return <LocationForm {...props}
@@ -310,21 +375,40 @@ class ApplicationViews extends Component {
                         deleteAnimal={this.deleteAnimal}
                     />
                 }} />
-
                 <Route exact path="/animals/:animalId(\d+)" render={(props) => {
                     // Find the animal with the id of the route parameter
                     let animal = this.state.animals.find(animal =>
                         animal.id === parseInt(props.match.params.animalId)
                     )
-
                     // If the animal wasn't found, create a default one
                     if (!animal) {
                         animal = { id: 404, name: "404", breed: "Dog not found" }
                     }
+                    // If current animal details is in the employeeAnimals joined table, adds to an array called employeeAnimalsId
+                    let employeeAnimalIds = this.state.employeeAnimals.filter(animalJoin => {
+                        let animalId = 0
+                        if (animalJoin != null && animalJoin.animalId != null) {
+                            animalId = animalJoin.animalId
+                        }
+                        if (animal.id === parseInt(animalId))
+                            return animal;
+                    })
+
+                    //Take employeeAnimalsId array and compare to employees table
+                    let employeeAnimals = this.state.employees.filter(employee => {
+                        let employeeId = 0;
+                        if(employee != null && employee.id != null){
+                            employeeId = employee.id;
+                        }
+                        for(let i = 0; i<employeeAnimalIds.length; i++){
+                            if(employeeAnimalIds[i].employeeId === employeeId)
+                                return employeeAnimalIds[i];
+                        }
+                    });
 
                     return <AnimalDetail {...props}
                         employees={this.state.employees}
-                        // animals={this.state.animals}
+                        employeeAnimals={employeeAnimals}
                         animal={animal}
                         deleteAnimal={this.deleteAnimal}
                     />
@@ -350,7 +434,6 @@ class ApplicationViews extends Component {
                         return <Redirect to="/login" />
                     }
                 }} />
-
                 <Route path="/employees/:employeeId(\d+)" render={(props) => {
                     let employee = this.state.employees.find(employee =>
                         employee.id === parseInt(props.match.params.employeeId)
@@ -360,18 +443,31 @@ class ApplicationViews extends Component {
                         employee = { id: 404, name: "404", time: "Status found" }
                     }
 
-                    let animalCaretaker = this.state.animals.find(animal => {
-                        let animalId = 0
-                        if (employee != null && employee.animalId != null) {
-                            animalId = employee.animalId
+                    // If current employee details is in the employeeAnimals joined table, adds to an array called employeeAnimalsId
+                    let employeeAnimalIds = this.state.employeeAnimals.filter(animalJoin => {
+                        let employeeId = 0
+                        if (animalJoin != null && animalJoin.employeeId != null) {
+                            employeeId = animalJoin.employeeId
                         }
-                        if (animal.id === parseInt(animalId))
-                            return animal
-                        return null
+                        if (employee.id === parseInt(employeeId))
+                            return employee;
                     })
 
+                    //Take employeeAnimalsId array and compare to animals table
+                    let employeeAnimals = this.state.animals.filter(animal => {
+                        let animalId = 0;
+                        if(animal != null && animal.id != null){
+                            animalId = animal.id;
+                        }
+                        for(let i = 0; i<employeeAnimalIds.length; i++){
+                            if(employeeAnimalIds[i].animalId === animalId)
+                                return employeeAnimalIds[i];
+                        }
+                    });
+
                     return <EmployeeDetail employee={employee}
-                        animalCaretaker={animalCaretaker}
+                        // animalCaretaker={animalCaretaker}
+                        employeeAnimals={employeeAnimals}
                         deleteEmployee={this.deleteEmployee}
                         animals={this.state.animals}
                     />
@@ -398,8 +494,30 @@ class ApplicationViews extends Component {
                     if (!owner) {
                         owner = { id: 404, name: "404" }
                     }
+                    // If current owner details is in the ownerAnimals joined table, adds to an array called ownerAnimalsId
+                    let ownerAnimalIds = this.state.ownerAnimals.filter(ownerJoin => {
+                        let ownerId = 0
+                        if (ownerJoin != null && ownerJoin.ownerId != null) {
+                            ownerId = ownerJoin.ownerId
+                        }
+                        if (owner.id === parseInt(ownerId))
+                            return owner;
+                    })
+
+                    //Take ownerAnimalsId array and compare to animal table
+                    let ownerAnimals = this.state.animals.filter(animal => {
+                        let animalId = 0;
+                        if(animal != null && animal.id != null){
+                            animalId = animal.id;
+                        }
+                        for(let i = 0; i<ownerAnimalIds.length; i++){
+                            if(ownerAnimalIds[i].animalId === animalId)
+                                return ownerAnimalIds[i];
+                        }
+                    });
 
                     return <OwnerDetail owner={owner}
+                        ownerAnimals={ownerAnimals}
                         deleteOwner={this.deleteOwner}
                     />
                 }} />

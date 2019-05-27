@@ -23,7 +23,19 @@ export default class Animal extends Component {
                             <img src={ dog } className="icon--dog" alt="happy dog"/>
                             { this.props.animal.name }
                         </h4>
-                        <h6 className="card-title">{ this.props.animal.employeeId === this.props.employees.id ? this.props.employees.name : "Please assign a hattaker" }</h6>
+                        <h6 className="card-body">
+                        <p>Caretakers:</p>
+                            
+                                { this.props.employeeAnimals.length>0 ? 
+                                        <ul>
+                                    {this.props.employeeAnimals.map(e => {
+                                        return <li key={e.id} id={e.id}> {e.name} </li>
+                                    })
+                                    }
+                                    </ul> :
+                                        <p>Please assign a caretaker</p>
+                                 }
+                        </h6>
                         <button 
                         className="btn btn-outline-primary animal-delete-btn btn-sm" 
                         disabled={ this.state.saveDisabled } 

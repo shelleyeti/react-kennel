@@ -37,50 +37,49 @@ class EmployeeForm extends Component {
         return (
             <React.Fragment>
                 <div className="card add-employee-card mx-auto">
-                <form className="employeeForm">
-                    <div className="form-group">
-                        <label htmlFor="employeeName">Employee Hat</label>
-                        <input
-                            type="text"
-                            required
-                            className="form-control"
-                            onChange={this.handleFieldChange}
-                            id="employeeName"
-                            placeholder="Employee name"/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="time">Set time</label>
-                        <select defaultValue=""
-                            name="time"
-                            id="time"
-                            onChange={this.handleFieldChange}>
-                            <option value="">Select an time option</option>
-                            <option value="Full Time">Full Time Hat</option>
-                            <option value="Part Time">Part Time Hat</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="animal">Assign to hat</label>
-                        <select defaultValue=""
-                            name="animal"
-                            id="animalId"
-                            onChange={this.handleFieldChange}>
-                            <option value="">Select an animal</option>
-                            {this.props.animals.map(e => (
-                                <option key={e.id} id={e.id} value={e.id}>
-                                    {e.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <button 
-                    type="button" 
-                    onClick={this.constructNewEmployee} 
-                    className="btn btn-outline-primary employeeButton float-right">
-                    Submit Hat
+                    <form className="employeeForm">
+                        <div className="form-group">
+                            <label htmlFor="employeeName">Employee Hat</label>
+                            <input
+                                type="text"
+                                required
+                                className="form-control"
+                                onChange={this.handleFieldChange}
+                                id="employeeName"
+                                placeholder="Employee name" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="time">Set time</label>
+                            <select defaultValue=""
+                                name="time"
+                                id="time"
+                                onChange={this.handleFieldChange}>
+                                <option value="">Select an time option</option>
+                                <option value="Full Time">Full Time Hat</option>
+                                <option value="Part Time">Part Time Hat</option> 
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="animal">Assign to hat</label>
+                            <select defaultValue=""
+                                name="animal"
+                                id="animalId"
+                                onChange={this.handleFieldChange}>
+                                <option value="">Select an animal</option>
+                                {this.props.animals.map(e => (
+                                    <option key={e.id} id={e.id} value={e.id}>
+                                        {e.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={this.constructNewEmployee}
+                            className="btn btn-outline-primary employeeButton float-right">
+                            Submit Hat
                     </button>
-                </form>
+                    </form>
                 </div>
             </React.Fragment>
         );

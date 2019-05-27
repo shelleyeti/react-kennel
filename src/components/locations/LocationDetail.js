@@ -23,7 +23,19 @@ export default class Location extends Component {
                             <img src={ location } className="icon--location" alt="building"/>
                             { this.props.location.name }
                         </h4>
-                        <h6 className="card-title">{ this.props.location.breed }</h6>
+                        <h6 className="card-body">
+                        <p>Employees:</p>
+                            
+                                { this.props.employeeLocations.length>0 ? 
+                                        <ul>
+                                    {this.props.employeeLocations.map(e => {
+                                        return <li key={e.id} id={e.id}> {e.name} </li>
+                                    })
+                                    }
+                                    </ul> :
+                                        <p>Please assign an employee</p>
+                                 }
+                        </h6>
                         <button 
                         className="btn btn-outline-primary location-delete-btn btn-sm" 
                         disabled={ this.state.saveDisabled } 

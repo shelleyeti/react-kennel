@@ -23,6 +23,19 @@ export default class Owner extends Component {
                             <img src={ owner } className="icon--owner" alt="pet owner"/>
                             { this.props.owner.name }
                         </h4>
+                        <h6 className="card-body">
+                        <p>Animals:</p>
+                            
+                                { this.props.ownerAnimals.length>0 ? 
+                                        <ul>
+                                    {this.props.ownerAnimals.map(e => {
+                                        return <li key={e.id} id={e.id}> {e.name} </li>
+                                    })
+                                    }
+                                    </ul> :
+                                        <p>Please assign an animal</p>
+                                 }
+                        </h6>
                         <button 
                         className="btn btn-outline-primary owner-delete-btn btn-sm" 
                         disabled={ this.state.saveDisabled } 
