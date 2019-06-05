@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import "./Animal.css"
 import dog from "./DogIcon.png"
+import KennelModal from "../Modal/Modal"
 
 export default class Animal extends Component {
     state = {
@@ -9,14 +10,29 @@ export default class Animal extends Component {
 
     handleClickDelete = (event) => {
         this.setState({
+            modalShow: true
+        })
+    }
+
+    handleClickedDeleteYes = () =>{
+        this.setState({
             saveDisabled: true
         })
         this.props.deleteAnimal(this.props.animal.id);
     }
 
+    hideModal = () =>{
+        this.setState({
+            modalShow: false
+        })
+    }
+
     render() {
         return (
             <section className="animal">
+                <KennelModal handleClickYes={this.handleClickedDeleteYes} 
+                onHide={this.hideModal} show={this.state.modalShow}/>
+
                 <div key={ this.props.animal.id } className="card edit-animal-card mx-auto">
                     <div className="card-body">
                         <h4 className="card-title">

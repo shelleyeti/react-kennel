@@ -45,39 +45,39 @@
   ],
   "animals": [
     {
-      "id": 1,
-      "name": "Catterina",
-      "breed": "cats"
-    },
-    {
-      "id": 2,
-      "name": "Doggo",
-      "breed": "dog"
-    },
-    {
-      "id": 4,
-      "name": "Devil's Mouth",
-      "breed": "snake"
-    },
-    {
-      "id": 5,
-      "name": "Legion",
-      "breed": "ants"
-    },
-    {
       "id": 6,
       "name": "Judgey",
       "breed": "lizard"
     },
     {
-      "name": "Slimey",
-      "breed": "snail",
-      "id": 15
-    },
-    {
       "name": "CoReY iS a PoOp",
       "breed": "Turd",
       "id": 16
+    },
+    {
+      "name": "Italian",
+      "breed": "dog",
+      "id": 17
+    },
+    {
+      "name": "Katalina",
+      "breed": "Doggy",
+      "id": 18
+    },
+    {
+      "name": "Poop",
+      "breed": "dogs",
+      "id": 19
+    },
+    {
+      "name": "a poopy dog",
+      "breed": "dog",
+      "id": 20
+    },
+    {
+      "name": "some animal",
+      "breed": "probably",
+      "id": 21
     }
   ],
   "owners": [
@@ -122,6 +122,66 @@
       "animalId": 16,
       "employeeId": 5,
       "id": 4
+    },
+    {
+      "animalId": 17,
+      "employeeId": null,
+      "id": 5
+    },
+    {
+      "animalId": 17,
+      "employeeId": 3,
+      "id": 6
+    },
+    {
+      "animalId": 17,
+      "employeeId": 3,
+      "id": 7
+    },
+    {
+      "animalId": 17,
+      "employeeId": null,
+      "id": 8
+    },
+    {
+      "animalId": 17,
+      "employeeId": 1,
+      "id": 9
+    },
+    {
+      "animalId": 18,
+      "employeeId": 1,
+      "id": 10
+    },
+    {
+      "animalId": 19,
+      "employeeId": 2,
+      "id": 11
+    },
+    {
+      "animalId": 20,
+      "employeeId": 5,
+      "id": 12
+    },
+    {
+      "animalId": 20,
+      "employeeId": 5,
+      "id": 13
+    },
+    {
+      "animalId": 20,
+      "employeeId": 4,
+      "id": 14
+    },
+    {
+      "animalId": 20,
+      "employeeId": 5,
+      "id": 15
+    },
+    {
+      "animalId": 21,
+      "employeeId": 1,
+      "id": 16
     }
   ],
   "employeeLocations": [

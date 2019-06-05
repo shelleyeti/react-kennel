@@ -1,28 +1,32 @@
-// import React, { Component } from "react";
-// import ReactModal from 'react-modal';
-// import "./Modal.css";
+import React, { Component } from 'react'
+import { Modal, Button } from 'react-bootstrap'
 
-// class Modal extends Component {
-//     state = {
-//         modalIsOpen: false
-//     }
-
-//     toggleModal() {
-//         this.setState({
-//             modalIsOpen: ! this.state.modalIsOpen
-//         });
-//     }
-    
-//     render() {
-//         return (
-//             <Modal isOpen={this.state.modalIsOpen}>
-//                 <ModalHeader toggle={this.toggleModal.bind(this)}>Title</ModalHeader>
-//                 <ModayBody>Are you sure you want to delete?</ModayBody>
-//                 <ModalFooter>
-//                     <button>No</button>
-//                     <button>Yes</button>
-//                 </ModalFooter>
-//             </Modal>
-//         )
-//     }
-// }
+export default class KennelModal extends Component {
+  render() {
+    return (
+      <Modal
+        {...this.props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        // handleClickYes={this.props.handleClickYes}
+        onHide={this.props.onHide}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Delete Item?
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            Are you sure you want to delete this item?
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.props.handleClickYes}>Yes</Button> 
+          <Button onClick={this.props.onHide}>No</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+}

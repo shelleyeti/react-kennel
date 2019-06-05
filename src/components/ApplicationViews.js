@@ -22,6 +22,8 @@ import LocationForm from "./locations/LocationForm"
 import OwnerForm from "./owners/OwnerForm"
 import AnimalEditForm from "./animals/AnimalEditForm"
 import Login from './authentication/Login'
+import KennelModal from "./Modal/Modal"
+import SearchResults from "./search/searchResults"
 
 
 class ApplicationViews extends Component {
@@ -33,7 +35,8 @@ class ApplicationViews extends Component {
         owners: [],
         employeeAnimals: [],
         employeeLocations: [],
-        ownerAnimals: []
+        ownerAnimals: [],
+        showModal: false
     }
 
 
@@ -53,12 +56,12 @@ class ApplicationViews extends Component {
     addAnimal = (animal) => {
         const newState = {};
         return AnimalManager.makeAnimal(animal)
-            .then((animalp) => AnimalManager.getAll())
+            .then((animals) => AnimalManager.getAll())
             .then(animals => newState.animals = animals)
             .then((animals) => {
                 this.props.history.push("/animals")
                 this.setState(newState)
-
+                //return animals so it can be used in the form
                 return animals;
             });
     };
@@ -73,7 +76,6 @@ class ApplicationViews extends Component {
                 this.setState(newState)
             });
     };
-
 
     deleteEmployee = (id) => {
         const newState = {};
@@ -294,32 +296,33 @@ class ApplicationViews extends Component {
                 this.setState(newState)
             })
     };
-    
-    componentDidMount() {
+
+    componentDidMount () {
         const newState = {};
         AnimalManager.getAll()
             .then(animals => { newState.animals = animals })
             .then(EmployeeManager.getAll).then(employees => { newState.employees = employees })
             .then(LocationManager.getAll).then(locations => { newState.locations = locations })
             .then(OwnerManager.getAll).then(owners => { newState.owners = owners })
-            .then(EmployeeAnimal.getAll).then(employeeAnimals => { 
-                newState.employeeAnimals = employeeAnimals})
-            .then(EmployeeLocation.getAll).then(employeeLocations => { newState.employeeLocations = employeeLocations})
-            .then(OwnerAnimal.getAll).then(ownerAnimals => { newState.ownerAnimals = ownerAnimals})
-            .then(() => 
-            this.setState(newState))
+            .then(EmployeeAnimal.getAll).then(employeeAnimals => {
+                newState.employeeAnimals = employeeAnimals
+            })
+            .then(EmployeeLocation.getAll).then(employeeLocations => { newState.employeeLocations = employeeLocations })
+            .then(OwnerAnimal.getAll).then(ownerAnimals => { newState.ownerAnimals = ownerAnimals })
+            .then(() =>
+                this.setState(newState))
     };
 
-    render() {
+    render () {
         return (
             <React.Fragment>
 
-                <Route exact path="/" render={(props) => {
-                    return <LocationList locations={this.state.locations}
-                        deleteLocation={this.deleteLocation}
+                <Route exact path="/" render={ (props) => {
+                    return <LocationList locations={ this.state.locations }
+                        deleteLocation={ this.deleteLocation }
                     />
-                }} />
-                <Route path="/locations/:locationsId(\d+)" render={(props) => {
+                } } />
+                <Route path="/locations/:locationsId(\d+)" render={ (props) => {
                     let location = this.state.locations.find(location =>
                         location.id === parseInt(props.match.params.locationsId)
                     )
@@ -327,7 +330,7 @@ class ApplicationViews extends Component {
                     if (!location) {
                         location = { id: 404, name: "404", address: "Address not found" }
                     }
-                    
+
                     // If current location details is in the employeeLocations joined table, adds to an array called employeeLocationsId
                     let employeeLocationsIds = this.state.employeeLocations.filter(locationJoin => {
                         let locationId = 0
@@ -341,32 +344,32 @@ class ApplicationViews extends Component {
                     //Take employeeLocationsId array and compare to employees table
                     let employeeLocations = this.state.employees.filter(employee => {
                         let employeeId = 0;
-                        if(employee != null && employee.id != null){
+                        if (employee != null && employee.id != null) {
                             employeeId = employee.id;
                         }
-                        for(let i = 0; i<employeeLocationsIds.length; i++){
-                            if(employeeLocationsIds[i].employeeId === employeeId)
+                        for (let i = 0; i < employeeLocationsIds.length; i++) {
+                            if (employeeLocationsIds[i].employeeId === employeeId)
                                 return employeeLocationsIds[i];
                         }
                     });
 
-                    return <LocationDetail location={location}
-                        deleteLocation={this.deleteLocation} 
-                        employeeLocations={employeeLocations}
-                        />
-                }} />
-                <Route path="/locations/new" render={(props) => {
-                    return <LocationForm {...props}
-                        addLocation={this.addlocation} />
-                }} />
-
-
-                <Route exact path="/animals" render={(props) => {
-                    return <AnimalList animals={this.state.animals}
-                        deleteAnimal={this.deleteAnimal}
+                    return <LocationDetail location={ location }
+                        deleteLocation={ this.deleteLocation }
+                        employeeLocations={ employeeLocations }
                     />
-                }} />
-                <Route exact path="/animals/:animalId(\d+)" render={(props) => {
+                } } />
+                <Route path="/locations/new" render={ (props) => {
+                    return <LocationForm { ...props }
+                        addLocation={ this.addlocation } />
+                } } />
+
+
+                <Route exact path="/animals" render={ (props) => {
+                    return <AnimalList animals={ this.state.animals }
+                        deleteAnimal={ this.deleteAnimal }
+                    />
+                } } />
+                <Route exact path="/animals/:animalId(\d+)" render={ (props) => {
                     // Find the animal with the id of the route parameter
                     let animal = this.state.animals.find(animal =>
                         animal.id === parseInt(props.match.params.animalId)
@@ -388,47 +391,48 @@ class ApplicationViews extends Component {
                     //Take employeeAnimalsId array and compare to employees table
                     let employeeAnimals = this.state.employees.filter(employee => {
                         let employeeId = 0;
-                        if(employee != null && employee.id != null){
+                        if (employee != null && employee.id != null) {
                             employeeId = employee.id;
                         }
-                        for(let i = 0; i<employeeAnimalIds.length; i++){
-                            if(employeeAnimalIds[i].employeeId === employeeId)
+                        for (let i = 0; i < employeeAnimalIds.length; i++) {
+                            if (employeeAnimalIds[i].employeeId === employeeId)
                                 return employeeAnimalIds[i];
                         }
                     });
 
-                    return <AnimalDetail {...props}
-                        employees={this.state.employees}
-                        employeeAnimals={employeeAnimals}
-                        animal={animal}
-                        deleteAnimal={this.deleteAnimal}
+                    return <AnimalDetail { ...props }
+                        kennelModal={ KennelModal }
+                        employees={ this.state.employees }
+                        employeeAnimals={ employeeAnimals }
+                        animal={ animal }
+                        deleteAnimal={ this.deleteAnimal }
                     />
-                }} />
-                <Route path="/animals/:animalId(\d+)/edit" render={props => {
-                    return <AnimalEditForm {...props}
-                        employees={this.state.employees}
-                        updateAnimal={this.updateAnimal} />
-                }}
+                } } />
+                <Route path="/animals/:animalId(\d+)/edit" render={ props => {
+                    return <AnimalEditForm { ...props }
+                        employees={ this.state.employees }
+                        updateAnimal={ this.updateAnimal } />
+                } }
                 />
-                <Route path="/animals/new" render={(props) => {
-                    return <AnimalForm {...props}
-                        addAnimal={this.addAnimal}
-                        animals={this.state.animals}
-                        employees={this.state.employees}
-                        addEmployeeAnimal={this.addEmployeeAnimal}
-                         />
-                }} />
+                <Route path="/animals/new" render={ (props) => {
+                    return <AnimalForm { ...props }
+                        addAnimal={ this.addAnimal }
+                        animals={ this.state.animals }
+                        employees={ this.state.employees }
+                        addEmployeeAnimal={ this.addEmployeeAnimal }
+                    />
+                } } />
 
 
-                <Route exact path="/employees" render={(props) => {
+                <Route exact path="/employees" render={ (props) => {
                     if (this.isAuthenticated()) {
-                        return <EmployeeList deleteEmployee={this.deleteEmployee}
-                            employees={this.state.employees} />
+                        return <EmployeeList deleteEmployee={ this.deleteEmployee }
+                            employees={ this.state.employees } />
                     } else {
                         return <Redirect to="/login" />
                     }
-                }} />
-                <Route path="/employees/:employeeId(\d+)" render={(props) => {
+                } } />
+                <Route path="/employees/:employeeId(\d+)" render={ (props) => {
                     let employee = this.state.employees.find(employee =>
                         employee.id === parseInt(props.match.params.employeeId)
                     )
@@ -450,37 +454,38 @@ class ApplicationViews extends Component {
                     //Take employeeAnimalsId array and compare to animals table
                     let employeeAnimals = this.state.animals.filter(animal => {
                         let animalId = 0;
-                        if(animal != null && animal.id != null){
+                        if (animal != null && animal.id != null) {
                             animalId = animal.id;
                         }
-                        for(let i = 0; i<employeeAnimalIds.length; i++){
-                            if(employeeAnimalIds[i].animalId === animalId)
+                        for (let i = 0; i < employeeAnimalIds.length; i++) {
+                            if (employeeAnimalIds[i].animalId === animalId)
                                 return employeeAnimalIds[i];
                         }
                     });
 
-                    return <EmployeeDetail employee={employee}
+                    return <EmployeeDetail employee={ employee }
+                        employees={ this.state.employees }
                         // animalCaretaker={animalCaretaker}
-                        employeeAnimals={employeeAnimals}
-                        deleteEmployee={this.deleteEmployee}
-                        animals={this.state.animals}
+                        employeeAnimals={ employeeAnimals }
+                        deleteEmployee={ this.deleteEmployee }
+                        animals={ this.state.animals }
                     />
-                }} />
-                <Route path="/employees/new" render={(props) => {
-                    return <EmployeeForm {...props}
-                        addEmployee={this.addEmployee}
-                        animals={this.state.animals}
-                        employees={this.state.employees}
+                } } />
+                <Route path="/employees/new" render={ (props) => {
+                    return <EmployeeForm { ...props }
+                        addEmployee={ this.addEmployee }
+                        animals={ this.state.animals }
+                        employees={ this.state.employees }
                     />
-                }} />
+                } } />
 
 
-                <Route exact path="/owners" render={(props) => {
-                    return <OwnerList owners={this.state.owners}
-                        deleteOwner={this.deleteOwner}
+                <Route exact path="/owners" render={ (props) => {
+                    return <OwnerList owners={ this.state.owners }
+                        deleteOwner={ this.deleteOwner }
                     />
-                }} />
-                <Route path="/owners/:ownerId(\d+)" render={(props) => {
+                } } />
+                <Route path="/owners/:ownerId(\d+)" render={ (props) => {
                     let owner = this.state.owners.find(owner =>
                         owner.id === parseInt(props.match.params.ownerId)
                     )
@@ -501,29 +506,38 @@ class ApplicationViews extends Component {
                     //Take ownerAnimalsId array and compare to animal table
                     let ownerAnimals = this.state.animals.filter(animal => {
                         let animalId = 0;
-                        if(animal != null && animal.id != null){
+                        if (animal != null && animal.id != null) {
                             animalId = animal.id;
                         }
-                        for(let i = 0; i<ownerAnimalIds.length; i++){
-                            if(ownerAnimalIds[i].animalId === animalId)
+                        for (let i = 0; i < ownerAnimalIds.length; i++) {
+                            if (ownerAnimalIds[i].animalId === animalId)
                                 return ownerAnimalIds[i];
                         }
                     });
 
-                    return <OwnerDetail owner={owner}
-                        ownerAnimals={ownerAnimals}
-                        deleteOwner={this.deleteOwner}
+                    return <OwnerDetail owner={ owner }
+                        ownerAnimals={ ownerAnimals }
+                        deleteOwner={ this.deleteOwner }
                     />
-                }} />
-                <Route path="/owners/new" render={(props) => {
-                    return <OwnerForm {...props}
-                        addOwner={this.addOwner}
-                        animals={this.state.animals}
-                        owners={this.state.owners}
+                } } />
+                <Route path="/owners/new" render={ (props) => {
+                    return <OwnerForm { ...props }
+                        addOwner={ this.addOwner }
+                        animals={ this.state.animals }
+                        owners={ this.state.owners }
                     />
-                }} />
+                } } />
 
-                <Route path="/login" component={Login} />
+                <Route path="/search" render={ (props) => {
+                    return <SearchResults { ...props }
+                        { ...this.props }
+                    // Can use the following instead of {...this.props}
+                    // getSearchResult={ this.props.getSearchResult }
+                    // searchInput={ this.props.searchInput }
+                    />
+                } } />
+
+                <Route path="/login" component={ Login } />
             </React.Fragment>
         )
     }

@@ -8,12 +8,13 @@ export default {
     return fetch(`${remoteURL}/animals`).then(e => e.json())
   },
   deleteAnimal(id) {
+    // debugger
     return fetch(`${remoteURL}/animals/${id}`, {
       method: "DELETE",
       header: {
           "Content-Type": "application/json"
       }
-    }).then(e => e.json())
+    })//.then(e => e.json())
   },
   editAnimal(editObj) {
     return fetch (`${remoteURL}/animals/${editObj.id}`,

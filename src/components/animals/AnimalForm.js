@@ -31,9 +31,10 @@ class AnimalForm extends Component {
             };
             // Create the animal and redirect user to animal list
             this.props.addAnimal(animal)
+            //grabs the animals from add animals
             .then((animals) => {
-                
-                var lastAnimal = animals[animals.length-1];
+                //gets last item in the array
+                let lastAnimal = animals[animals.length-1];
                 const joined = {
                     animalId: parseInt(lastAnimal.id),
                     employeeId: parseInt(this.state.employeeId)
